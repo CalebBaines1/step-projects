@@ -16,7 +16,12 @@
  * Adds a random fact about Caleb to the page.
  */
 function addRandomFact() {
-  const facts = ['I like to read.', 'Ping pong is one of my favorite sports.', 'I ran track in high school.', 'My favorite flavor of ice cream is blue moon.'];
+  const facts = [
+    'I like to read.',
+    'Ping pong is one of my favorite sports.',
+    'I ran track in high school.',
+    'My favorite flavor of ice cream is blue moon.',
+  ];
 
   // Pick a random fact about Caleb.
   const fact = facts[Math.floor(Math.random() * facts.length)];
