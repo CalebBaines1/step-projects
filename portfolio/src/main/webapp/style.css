@@ -1,7 +1,35 @@
+body {
+  margin: 0px;
+  text-align: center;
+}
+
 #content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+  background: linear-gradient(to bottom, white, #BBDEFB );
+  border-width: 1em;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#intro-block {
+  width: 70vw;
+  height: 225px;
+  display: inline-block;
+}
+
+#intro-text {
+  position: relative;
+  bottom: 56px;
+}
+
+#intro-img{
+  padding: 5px;
+}
+
+.text-block {
+  width: 30vw;
+  height: 10vh;
+  display: inline-block;
 }
 
 #fact-container {
