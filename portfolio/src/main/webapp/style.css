@@ -2,6 +2,7 @@ html {
   /* Sets background to cover entire screen.*/  
   background: linear-gradient(to bottom, white, #BBDEFB ) no-repeat center fixed;
   background-size: cover;
+  font-family: Impact, Charcoal, sans-serif;
 }
 body {
   margin: 0px;
