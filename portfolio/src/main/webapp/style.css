@@ -23,6 +23,7 @@ body {
 
 #intro-text {
   position: relative;
+  text-align: left;
   bottom: 56px;
 }
 
@@ -30,9 +31,24 @@ body {
   padding: 5px;
 }
 
+.section-block {
+  width: 70vw;
+  height: 10vh;
+  text-align: left;
+  display: inline-block;
+}
+
+.heading-block {
+  position: relative;
+  bottom: 2vw;
+  width: 25vw;
+  display: inline-block;
+}
+
 .text-block {
   width: 30vw;
   height: 10vh;
+  padding-right: 1vw;
   display: inline-block;
 }
 
