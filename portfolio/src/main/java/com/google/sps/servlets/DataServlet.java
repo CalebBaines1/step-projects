@@ -15,6 +15,8 @@
 package com.google.sps.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +26,40 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
  
-  private String greeting;
+  private List<String> greetings;
+
+  @Override
+  public void init() {
+    greetings = new ArrayList<>();
+    greetings.add("Hello Caleb.");
+    greetings.add("Good morning.");
+    greetings.add("Hey!");
+  }
+
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    greeting = "Hello Caleb";
-    response.setContentType("text/html;");
-    response.getWriter().println(greeting);
+    String json = convertToJson(greetings);
+
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
+  }
+
+    /**
+   * Converts a list of greetings into a JSON string using manual String concatentation.
+   */
+  private String convertToJson(List<String> greetings) {
+    String json = "{";
+    json += "\"Greetings\": ";
+    json += "[" ;
+    json += "\"" + greetings.get(0) + "\"";
+    json += ", ";
+    json += "\"" + greetings.get(1) + "\"";
+    json += ", ";
+    json += "\"" + greetings.get(2) + "\"";
+    json += "]";
+    json += "}";
+
+    return json;
   }
 }
