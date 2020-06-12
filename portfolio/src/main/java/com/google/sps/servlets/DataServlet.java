@@ -26,37 +26,37 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
  
-  private List<String> greetings;
+  private List<String> comments;
 
   @Override
   public void init() {
-    greetings = new ArrayList<>();
-    greetings.add("Hello Caleb.");
-    greetings.add("Good morning.");
-    greetings.add("Hey!");
+    comments = new ArrayList<>();
+    comments.add("This is a nice page.");
+    comments.add("You like engineering? I do too.");
+    comments.add("Cool website.");
   }
 
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJson(greetings);
+    String json = convertToJson(comments);
 
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
     /**
-   * Converts a list of greetings into a JSON string using manual String concatentation.
+   * Converts a list of comments into a JSON string using manual String concatentation.
    */
-  private String convertToJson(List<String> greetings) {
+  private String convertToJson(List<String> comments) {
     String json = "{";
-    json += "\"Greetings\": ";
+    json += "\"Comments\": ";
     json += "[" ;
-    json += "\"" + greetings.get(0) + "\"";
+    json += "\"" + comments.get(0) + "\"";
     json += ", ";
-    json += "\"" + greetings.get(1) + "\"";
+    json += "\"" + comments.get(1) + "\"";
     json += ", ";
-    json += "\"" + greetings.get(2) + "\"";
+    json += "\"" + comments.get(2) + "\"";
     json += "]";
     json += "}";
 

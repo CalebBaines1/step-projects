@@ -43,15 +43,15 @@ function createListElement(text) {
 /**
  * Fetches json from the server.
  */
-function getIntroduction() {
-  fetch('/data').then(response => response.json()).then((greetings) => {
-  console.log(greetings);
+function getComments() {
+  fetch('/data').then(response => response.json()).then((comments) => {
+  console.log(comments);
 
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerHtml = '';
+  const commentContainer = document.getElementById('comment-container');
+  commentContainer.innerHtml = '';
   var index;
-  for (index in greetings.Greetings){
-    greetingContainer.appendChild(createListElement(greetings.Greetings[index]));
+  for (index in comments.Comments){
+    commentContainer.appendChild(createListElement(comments.Comments[index]));
   }
 
   });
