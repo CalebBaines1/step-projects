@@ -23,10 +23,15 @@ public class Comments {
   private List<String> text = new ArrayList<>();
   private List<Boolean> like = new ArrayList<>();
 
-  public void addComment(String inputName, String inputText, Boolean inputLike){
+  public void addName(String inputName){
     name.add(inputName);
-    text.add(inputText);
-    like.add(inputLike);
   }
 
+  public void addText(String inputText){
+    text.add(inputText);
+  }
+
+  public void addLike(Boolean inputLike){
+    like.add(inputLike);
+  }
 }

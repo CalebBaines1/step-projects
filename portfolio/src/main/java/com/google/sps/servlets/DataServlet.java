@@ -28,40 +28,28 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
  
-  private List<String> comments;
-
-  @Override
-  public void init() {
-    comments = new ArrayList<>();
-    comments.add("This is a nice page.");
-    comments.add("You like engineering? I do too.");
-    comments.add("Cool website.");
-  }
-
+  private Comments comments = new Comments();
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJson(comments);
-
+    String json = new Gson().convertToJson(comments);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
-    /**
-   * Converts a list of comments into a JSON string using manual String concatentation.
-   */
-  private String convertToJson(List<String> comments) {
-    String json = "{";
-    json += "\"Comments\": ";
-    json += "[" ;
-    json += "\"" + comments.get(0) + "\"";
-    json += ", ";
-    json += "\"" + comments.get(1) + "\"";
-    json += ", ";
-    json += "\"" + comments.get(2) + "\"";
-    json += "]";
-    json += "}";
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    getComment(request);
+    response.sendRedirect("/index.html");
+  }
 
-    return json;
+  private void getComment(HttpServletRequest request){
+    String name = request.getParameter("name-text");
+    String comment = request.getParameter("comment-text");
+    Boolean like = request.getParameter('like');
+
+    comments.addName(name);
+    comments.addText(comment);
+    comments.addLike(like);
   }
 }
