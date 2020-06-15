@@ -63,11 +63,24 @@
             <br>
             Github: https://github.com/CalebBaines1
         </p>
-        <br>
-        <p>Click here to fetch comments from the servlet.</p>
-        <button onclick="getComments()">Here</button>
-        <div id="comment-container"></div>
-        <br>
+      <br>
+      <form action="/data" method="POST">
+ 
+        <h3>Enter a comment:</h3>
+        <label for="name-text">Name:</label><br>
+        <input type="text" id="name" name="name-text">
+        <br><br>
+
+        <label for="comment-text">Comment:</label><br>
+        <textarea id="comment-text"name="comment-text"></textarea>
+        <br><br>
+
+        <input type="checkbox" name="like" value="true"> Like
+        <br><br>
+
+        <input type="submit" >
+      </form>
+      <br>
     </div>
   </body>
 </html>
