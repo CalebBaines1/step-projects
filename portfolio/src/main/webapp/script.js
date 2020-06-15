@@ -31,40 +31,28 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
-/** Adds set greeting to the DOM. */
-function addGreetingToDom(greeting) {
-  console.log('Adding greeting to dom: ' + greeting);
-
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+/**
+ * Creates an <li> element containing text.
+ */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
 
 /**
- * Handles response by converting it to text and passing the result to
- * addQuoteToDom().
+ * Fetches json from the server.
  */
-function handleResponse(response) {
-  console.log('Handling the response.');
+function getComments() {
+  fetch('/data').then(response => response.json()).then((comments) => {
+  console.log(comments);
 
-  // response.text() returns a Promise, because the response is a stream of
-  // content and not a simple variable.
-  const textPromise = response.text();
+  const commentContainer = document.getElementById('comment-container');
+  commentContainer.innerHtml = '';
+  var index;
+  for (index in comments.Comments){
+    commentContainer.appendChild(createListElement(comments.Comments[index]));
+  }
 
-  // When the response is converted to text, pass the result into the
-  // addGreetingToDom() function.
-  textPromise.then(addGreetingToDom);
+  });
 }
-
-/**
- * Fetches a set greeting from the server and adds it to the DOM.
- */
-function getIntroduction() {
-  console.log('Fetching greeting.');
-
-  // The fetch() function returns a Promise because the request is asynchronous.
-  const responsePromise = fetch('/data');
-
-  // When the request is complete, pass the response into handleResponse().
-  responsePromise.then(handleResponse);
-}
-
