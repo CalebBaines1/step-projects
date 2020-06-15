@@ -56,3 +56,8 @@ body {
 #fact-container {
   margin-top: 20px;
 }
+
+#comment-container {
+  margin-left: 40vw;
+  text-align: left;
+}

@@ -49,9 +49,16 @@ function getComments() {
 
   const commentContainer = document.getElementById('comment-container');
   commentContainer.innerHtml = '';
+
   var index;
-  for (index in comments.Comments){
-    commentContainer.appendChild(createListElement(comments.Comments[index]));
+  var topList;
+  // Format comments.
+  for (index in comments.name){
+    topList = document.createElement('ul');
+    topList.innerText = comments.name[index]
+    topList.appendChild(createListElement(comments.text[index]));
+    topList.appendChild(createListElement(((comments.like[index]) ? "Like":"Dislike")));
+    commentContainer.appendChild(topList);
   }
 
   });
