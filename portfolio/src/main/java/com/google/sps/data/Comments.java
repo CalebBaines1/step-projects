@@ -14,6 +14,7 @@
 
 package com.google.sps.data;
 
+import com.google.sps.data.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
