@@ -19,19 +19,9 @@ import java.util.List;
 
 public class Comments {
 
-  private List<String> name = new ArrayList<>();
-  private List<String> text = new ArrayList<>();
-  private List<Boolean> like = new ArrayList<>();
+  private List<Comment> comments = new ArrayList<>();
 
-  public void addName(String inputName){
-    name.add(inputName);
-  }
-
-  public void addText(String inputText){
-    text.add(inputText);
-  }
-
-  public void addLike(Boolean inputLike){
-    like.add(inputLike);
+  public addComment(Comment comment){
+    comments.add(comment);
   }
 }
