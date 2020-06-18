@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.Comment;
 import com.google.sps.data.Comments;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -39,17 +40,19 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    getComment(request);
+    Comment comment = getComment(request);
+    comments.addComment(comment);
     response.sendRedirect("/index.html");
   }
 
-  private void getComment(HttpServletRequest request){
+  private Comment getComment(HttpServletRequest request){
+    Comment comment;
     String name = request.getParameter("name-text");
-    String comment = request.getParameter("comment-text");
-    String like = request.getParameter("like");
+    String text = request.getParameter("comment-text");
+    Boolean like = Boolean.parseBoolean(request.getParameter("like"));
 
-    comments.addName(name);
-    comments.addText(comment);
-    comments.addLike(Boolean.parseBoolean(like));
+    comment.setComment(name, text, like);
+
+    return comment;
   }
 }
