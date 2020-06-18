@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.sps.data.Comment;
 import com.google.sps.data.Comments;
 import com.google.gson.Gson;
@@ -42,6 +45,13 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Comment comment = getComment(request);
     comments.addComment(comment);
+
+    Entity commentEntity = new Entity("Comment");
+    commentEntity = updateEntity(comment, commentEntity);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(commentEntity);
+
     response.sendRedirect("/index.html");
   }
 
@@ -55,4 +65,17 @@ public class DataServlet extends HttpServlet {
 
     return comment;
   }
+
+  private Entity updateEntity(Comment comment, Entity commentEntity){
+    String name = comment.getName();
+    String text = comment.getText();
+    Boolean like = comment.getLike();
+
+    commentEntity.setProperty("name", name);
+    commentEntity.setProperty("text", text);
+    commentEntity.setProperty("like", like);
+
+    return commentEntity;
+  }
+
 }

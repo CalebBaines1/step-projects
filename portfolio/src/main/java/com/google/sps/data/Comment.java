@@ -26,4 +26,15 @@ public class Comment {
     like = inputLike;
   }
 
+  public String getName(){
+    return name;
+  }
+
+  public String getText(){
+    return text;
+  }
+
+  public Boolean getLike(){
+    return like;
+  }
 }
