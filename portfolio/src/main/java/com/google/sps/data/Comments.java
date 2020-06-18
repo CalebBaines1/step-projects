@@ -22,7 +22,7 @@ public class Comments {
 
   private List<Comment> comments = new ArrayList<>();
 
-  public addComment(Comment comment){
+  public void addComment(Comment comment){
     comments.add(comment);
   }
 }
