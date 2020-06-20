@@ -56,14 +56,11 @@ public class DataServlet extends HttpServlet {
   }
 
   private Comment getComment(HttpServletRequest request){
-    Comment comment = new Comment();
     String name = request.getParameter("name-text");
     String text = request.getParameter("comment-text");
     Boolean like = Boolean.parseBoolean(request.getParameter("like"));
 
-    comment.setComment(name, text, like);
-
-    return comment;
+    return new Comment(name, text, like);
   }
 
   private Entity updateEntity(Comment comment, Entity commentEntity){
