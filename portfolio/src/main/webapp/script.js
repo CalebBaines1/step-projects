@@ -44,8 +44,8 @@ function createListElement(text) {
  * Fetches json from the server.
  */
 function getComments() {
-  fetch('/data').then(response => response.json()).then((json) => {
-  console.log(json);
+  fetch('/data').then(response => response.json()).then((result) => {
+  console.log(result);
 
   const commentContainer = document.getElementById('comment-container');
   commentContainer.innerHtml = '';
@@ -53,11 +53,11 @@ function getComments() {
   var index;
   var topList;
   // Format comments.
-  for (index in json.comments){
+  for (index in result.comments){
     topList = document.createElement('ul');
-    topList.innerText = json.comments[index].name;
-    topList.appendChild(createListElement(json.comments[index].text));
-    topList.appendChild(createListElement(((json.comments[index].like) ? "Like":"Dislike")));
+    topList.innerText = result.comments[index].name;
+    topList.appendChild(createListElement(result.comments[index].text));
+    topList.appendChild(createListElement(((result.comments[index].like) ? "Like":"Dislike")));
     commentContainer.appendChild(topList);
   }
 
