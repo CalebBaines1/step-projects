@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that handles comments. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -59,7 +59,6 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Comment comment = getComment(request);
-    //comments.addComment(comment);
 
     Entity commentEntity = new Entity("Comment");
     commentEntity = updateEntity(comment, commentEntity);
