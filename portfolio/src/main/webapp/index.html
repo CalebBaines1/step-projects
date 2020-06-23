@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getComments()">
     <div id="content">
       <h1>Caleb Baines Portfolio</h1>
       <h2>Introduction</h2>
@@ -63,8 +63,27 @@
             <br>
             Github: https://github.com/CalebBaines1
         </p>
-        <br>
-        <p>Click <a href="/data">here </a> to access data servlet.</p>
+      <br>
+      <form action="/data" method="POST">
+ 
+        <h3>Enter a comment:</h3>
+        <label for="name-text">Name:</label><br>
+        <input type="text" id="name" name="name-text">
+        <br><br>
+
+        <label for="comment-text">Comment:</label><br>
+        <textarea id="comment-text" name="comment-text"></textarea>
+        <br><br>
+
+        <input type="checkbox" name="like" value="true"> Like
+        <br><br>
+
+        <input type="submit" >
+      </form>
+      <br>
+      <h3>Comments</h3>
+      <div id="comment-container"><div>
+      <br>
     </div>
   </body>
 </html>

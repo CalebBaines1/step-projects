@@ -31,3 +31,35 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
+/**
+ * Creates an <li> element containing text.
+ */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
+/**
+ * Fetches json from the server.
+ */
+function getComments() {
+  fetch('/data').then(response => response.json()).then((result) => {
+  console.log(result);
+
+  const commentContainer = document.getElementById('comment-container');
+  commentContainer.innerHtml = '';
+
+  var index;
+  var topList;
+  // Format comments.
+  for (index in result.comments){
+    topList = document.createElement('ul');
+    topList.innerText = result.comments[index].name;
+    topList.appendChild(createListElement(result.comments[index].text));
+    topList.appendChild(createListElement(((result.comments[index].like) ? "Like":"Dislike")));
+    commentContainer.appendChild(topList);
+  }
+
+  });
+}

@@ -14,7 +14,12 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.Comment;
+import com.google.sps.data.Comments;
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +28,28 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+ 
+  private Comments comments = new Comments();
+ 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Caleb!</h1>");
+    String json = new Gson().toJson(comments);
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Comment comment = getComment(request);
+    comments.addComment(comment);
+    response.sendRedirect("/index.html");
+  }
+
+  private Comment getComment(HttpServletRequest request){
+    String name = request.getParameter("name-text");
+    String text = request.getParameter("comment-text");
+    Boolean like = Boolean.parseBoolean(request.getParameter("like"));
+
+    return new Comment(name, text, like);
   }
 }
