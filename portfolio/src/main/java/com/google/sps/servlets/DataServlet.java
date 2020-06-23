@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.Comment;
+import com.google.sps.data.Comments;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,40 +29,27 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
  
-  private List<String> comments;
-
-  @Override
-  public void init() {
-    comments = new ArrayList<>();
-    comments.add("This is a nice page.");
-    comments.add("You like engineering? I do too.");
-    comments.add("Cool website.");
-  }
-
+  private Comments comments = new Comments();
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJson(comments);
-
+    String json = new Gson().toJson(comments);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
-    /**
-   * Converts a list of comments into a JSON string using manual String concatentation.
-   */
-  private String convertToJson(List<String> comments) {
-    String json = "{";
-    json += "\"Comments\": ";
-    json += "[" ;
-    json += "\"" + comments.get(0) + "\"";
-    json += ", ";
-    json += "\"" + comments.get(1) + "\"";
-    json += ", ";
-    json += "\"" + comments.get(2) + "\"";
-    json += "]";
-    json += "}";
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Comment comment = getComment(request);
+    comments.addComment(comment);
+    response.sendRedirect("/index.html");
+  }
 
-    return json;
+  private Comment getComment(HttpServletRequest request){
+    String name = request.getParameter("name-text");
+    String text = request.getParameter("comment-text");
+    Boolean like = Boolean.parseBoolean(request.getParameter("like"));
+
+    return new Comment(name, text, like);
   }
 }

@@ -44,14 +44,21 @@ function createListElement(text) {
  * Fetches json from the server.
  */
 function getComments() {
-  fetch('/data').then(response => response.json()).then((comments) => {
-  console.log(comments);
+  fetch('/data').then(response => response.json()).then((result) => {
+  console.log(result);
 
   const commentContainer = document.getElementById('comment-container');
   commentContainer.innerHtml = '';
+
   var index;
-  for (index in comments.Comments){
-    commentContainer.appendChild(createListElement(comments.Comments[index]));
+  var topList;
+  // Format comments.
+  for (index in result.comments){
+    topList = document.createElement('ul');
+    topList.innerText = result.comments[index].name;
+    topList.appendChild(createListElement(result.comments[index].text));
+    topList.appendChild(createListElement(((result.comments[index].like) ? "Like":"Dislike")));
+    commentContainer.appendChild(topList);
   }
 
   });
