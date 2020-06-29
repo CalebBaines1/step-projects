@@ -20,7 +20,7 @@ public class Comment {
   private String text = new String();
   private Boolean like = new Boolean(false);
 
-  public Comment(String inputName, String inputText, Boolean inputLike){
+  public Comment(String inputName, String inputText, Boolean inputLike) {
     name = inputName;
     text = inputText;
     like = inputLike;
